@@ -1,5 +1,7 @@
 using System.Data;
-
+using Test.Models;
+using Npgsql;
+using Dapper;
 namespace Test.Repositories;
 
 public class CarRepository
@@ -10,5 +12,9 @@ public class CarRepository
     {
         _connection = connection;
     }
-    
+
+    public ICollection<Car> GetAll()
+    {
+        return _connection.Query<Car>("SELECT * FROM \"Cars\" ").ToList();
+    }
 }
