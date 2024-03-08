@@ -8,11 +8,13 @@ public class M0001_InitialMigration: Migration
     public override void Up()
     {
         Create.Table("Cars")
-            .WithColumn("Id").AsInt64().PrimaryKey().NotNullable()
-            .WithColumn("Brand").AsString()
-            .WithColumn("Model").AsString()
-            .WithColumn("YearOfRelease").AsDateTime()
-            .WithColumn("VinCode").AsString();
+            .WithColumn("id").AsInt64().PrimaryKey().NotNullable()
+            .WithColumn("brand").AsString()
+            .WithColumn("model").AsString()
+            .WithColumn("yearofrelease").AsInt64()
+            .WithColumn("vincode").AsString();
+        Insert.IntoTable("Cars")
+            .Row(new {id = 1,  brand = "sdfs", model = "dsfsd", yearofrelease = 2012, vincode = "dsflskdf"});
         Create.Table("Users")
             .WithColumn("Id").AsInt64().PrimaryKey().NotNullable()
             .WithColumn("Name").AsString().NotNullable()
@@ -26,7 +28,7 @@ public class M0001_InitialMigration: Migration
             .WithColumn("Description").AsString()
             .WithColumn("Status").AsString().NotNullable();
         Create.ForeignKey().FromTable("Orders").ForeignColumn("UserId").ToTable("Users").PrimaryColumn("Id");
-        Create.ForeignKey().FromTable("Orders").ForeignColumn("CarId").ToTable("Cars").PrimaryColumn("Id");
+        Create.ForeignKey().FromTable("Orders").ForeignColumn("CarId").ToTable("Cars").PrimaryColumn("id");
     }
 
     public override void Down()
