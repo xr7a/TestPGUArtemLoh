@@ -7,7 +7,7 @@ namespace Test.Controllers;
 
 [ApiController]
 [Route("cars")]
-public class CarController
+public class CarController: ControllerBase
 {
     private readonly CarRepository _carRepository;
     public CarController(CarRepository carRepository)
